@@ -31,10 +31,15 @@ public class MainActivity extends AppCompatActivity {
         JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
         int resultCode = scheduler.schedule(info);
         if (resultCode == JobScheduler.RESULT_SUCCESS) {
-            Log.d(TAG, "Job has been scheduled successfully");
+            Log.d(TAG, "Job has been scheduled SUCCESSFULLY");
+        } else {
+            Log.d(TAG, "Job Scheduling has FAILED");
         }
     }
 
     public void cancelJob(View view) {
+        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        scheduler.cancel(123);
+        Log.d(TAG, "Job has been CANCELLED");
     }
 }
