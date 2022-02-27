@@ -23,6 +23,9 @@ public class ExampleJobService extends JobService {
             public void run() {
                 for (int i = 0; i < 10; i++) {
                     Log.d(TAG, "run: " + i);
+                    if (jobCancelled) {
+                        return;
+                    }
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -39,6 +42,8 @@ public class ExampleJobService extends JobService {
 
     @Override
     public boolean onStopJob(JobParameters jobParameters) {
-        return false;
+        Log.d(TAG, "Job cancelled before completion");
+        jobCancelled = true;
+        return true;
     }
 }
